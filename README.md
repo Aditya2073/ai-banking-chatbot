@@ -21,13 +21,89 @@ An intelligent banking chatbot system powered by **DeepSeek AI** that provides 2
 
 ---
 
-## 📋 Prerequisites
+## 📋 Prerequisites & Installation Guide
 
-| Requirement | Mac | Windows |
-|-------------|-----|---------|
-| **Node.js** (v18+) | `brew install node` | Download from [nodejs.org](https://nodejs.org/) |
-| **MySQL** (v8.0+) | `brew install mysql` | Download from [dev.mysql.com](https://dev.mysql.com/downloads/installer/) |
-| **Git** | `brew install git` | Download from [git-scm.com](https://git-scm.com/downloads) |
+### 1. Install Node.js (v18 or higher)
+
+#### On Mac:
+```bash
+# Option A: Using Homebrew (recommended)
+brew install node
+
+# Option B: Using the installer
+# Download from https://nodejs.org/ and run the .pkg installer
+```
+
+#### On Windows:
+1. Go to [https://nodejs.org/](https://nodejs.org/)
+2. Download the **LTS** version (.msi installer)
+3. Run the installer → Click **Next** through all steps
+4. ✅ Make sure **"Add to PATH"** is checked
+5. Restart your terminal after installation
+
+#### Verify installation (both platforms):
+```bash
+node --version    # Should show v18.x or higher
+npm --version     # Should show 9.x or higher
+```
+
+---
+
+### 2. Install MySQL (v8.0 or higher)
+
+#### On Mac:
+```bash
+# Install MySQL
+brew install mysql
+
+# Start MySQL service
+brew services start mysql
+
+# MySQL will be installed with NO root password
+# To connect, simply run:
+mysql -u root
+```
+
+#### On Windows:
+1. Go to [https://dev.mysql.com/downloads/installer/](https://dev.mysql.com/downloads/installer/)
+2. Download **MySQL Installer for Windows** (mysql-installer-community)
+3. Run the installer and choose **"Developer Default"** or **"Server Only"**
+4. During setup:
+   - Choose **Standalone MySQL Server**
+   - Keep the default port **3306**
+   - Set the **root password** (remember this — you'll need it for `.env`)
+   - ✅ Check **"Configure MySQL Server as a Windows Service"**
+   - ✅ Check **"Start the MySQL Server at System Startup"**
+5. Click **Execute** to complete installation
+
+#### Verify installation (both platforms):
+```bash
+mysql --version   # Should show mysql Ver 8.x or 9.x
+```
+
+---
+
+### 3. Install Git
+
+#### On Mac:
+```bash
+# Option A: Using Homebrew
+brew install git
+
+# Option B: Install Xcode Command Line Tools (includes Git)
+xcode-select --install
+```
+
+#### On Windows:
+1. Go to [https://git-scm.com/downloads](https://git-scm.com/downloads)
+2. Download the Windows installer
+3. Run the installer → use default settings
+4. ✅ Make sure **"Git from the command line and also from 3rd-party software"** is selected
+
+#### Verify installation (both platforms):
+```bash
+git --version     # Should show git version 2.x
+```
 
 ---
 
