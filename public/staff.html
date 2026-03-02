@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bank Staff Dashboard - AI Banking Chatbot System">
+    <title>Staff Dashboard - AI Banking</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <!-- Background Particles -->
+    <div class="bg-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-icon">🏦</div>
+                <div>
+                    <h2>AI Banking</h2>
+                    <span>Staff Portal</span>
+                </div>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-link active" onclick="showSection('overview')" data-section="overview">
+                        <span class="nav-icon">📊</span> Dashboard
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="showSection('customers')" data-section="customers">
+                        <span class="nav-icon">👥</span> Customers
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="showSection('transactions')" data-section="transactions">
+                        <span class="nav-icon">📋</span> Transactions
+                    </button>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">S</div>
+                    <div class="user-details">
+                        <div class="name" id="userName">Staff</div>
+                        <div class="role" id="userRole">Bank Staff</div>
+                    </div>
+                </div>
+                <button class="btn-logout" onclick="logout()">
+                    🚪 Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Section -->
+            <div class="section-panel active" id="section-overview">
+                <div class="page-header">
+                    <h1>📊 Staff Dashboard</h1>
+                    <p>Monitor banking operations and customer activities</p>
+                </div>
+
+                <div class="stats-grid" id="dashboardStats">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-value" id="totalCustomers">0</div>
+                        <div class="stat-label">Total Customers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-value" id="totalDeposits">₹0</div>
+                        <div class="stat-label">Total Deposits</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-value" id="totalTxns">0</div>
+                        <div class="stat-label">Total Transactions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-value" id="recentTxns">0</div>
+                        <div class="stat-label">Recent (24h)</div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>📋 Recent Activity</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Sender</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentActivityBody">
+                                <tr>
+                                    <td colspan="6" class="empty-state">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customers Section -->
+            <div class="section-panel" id="section-customers">
+                <div class="page-header">
+                    <h1>👥 Customer Management</h1>
+                    <p>View and manage all bank customers</p>
+                </div>
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>👥 All Customers</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Account No.</th>
+                                    <th>Balance</th>
+                                    <th>Type</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customersBody">
+                                <tr>
+                                    <td colspan="6" class="empty-state">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions Section -->
+            <div class="section-panel" id="section-transactions">
+                <div class="page-header">
+                    <h1>📋 All Transactions</h1>
+                    <p>Monitor all banking transactions</p>
+                </div>
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>📋 Transaction Log</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Sender</th>
+                                    <th>From Account</th>
+                                    <th>To Account</th>
+                                    <th>Description</th>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allTransactionsBody">
+                                <tr>
+                                    <td colspan="7" class="empty-state">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Customer Detail Modal -->
+    <div class="modal-overlay" id="customerModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>👤 Customer Details</h3>
+                <button class="modal-close" onclick="closeCustomerModal()">✕</button>
+            </div>
+            <div class="modal-body" id="customerModalBody">
+                <div class="loader">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot FAB -->
+    <button class="chatbot-fab" id="chatbotFab" onclick="toggleChatbot()">
+        🤖
+        <span class="badge-dot"></span>
+    </button>
+
+    <!-- Chatbot Window -->
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chat-header">
+            <div class="chat-title">
+                <div class="bot-avatar">🤖</div>
+                <div>
+                    <h4>BankBot AI</h4>
+                    <div class="status"><span class="dot"></span> Online</div>
+                </div>
+            </div>
+            <button class="chat-close" onclick="toggleChatbot()">✕</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-message bot">
+                <div class="message-avatar">🤖</div>
+                <div>
+                    <div class="message-bubble">
+                        👋 Hello! I'm BankBot, your AI banking assistant. How can I help you today?
+                    </div>
+                    <div class="message-time">Just now</div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Type your message..." onkeydown="handleChatKeydown(event)">
+            <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()">➤</button>
+        </div>
+    </div>
+
+    <script src="/js/staff.js"></script>
+    <script src="/js/chatbot.js"></script>
+</body>
+
+</html>
