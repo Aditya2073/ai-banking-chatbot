@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Customer Dashboard - AI Banking Chatbot System">
+    <title>Customer Dashboard - AI Banking</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <!-- Background Particles -->
+    <div class="bg-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-icon">🏦</div>
+                <div>
+                    <h2>AI Banking</h2>
+                    <span>Customer Portal</span>
+                </div>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-link active" onclick="showSection('overview')" data-section="overview">
+                        <span class="nav-icon">📊</span> Overview
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="showSection('balance')" data-section="balance">
+                        <span class="nav-icon">💰</span> My Accounts
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="showSection('transactions')" data-section="transactions">
+                        <span class="nav-icon">📋</span> Transactions
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="showSection('transfer')" data-section="transfer">
+                        <span class="nav-icon">💸</span> Transfer
+                    </button>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <div class="user-details">
+                        <div class="name" id="userName">User</div>
+                        <div class="role" id="userRole">Customer</div>
+                    </div>
+                </div>
+                <button class="btn-logout" onclick="logout()">
+                    🚪 Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Section -->
+            <div class="section-panel active" id="section-overview">
+                <div class="page-header">
+                    <h1>👋 Welcome Back!</h1>
+                    <p>Here's your banking overview</p>
+                </div>
+
+                <div class="stats-grid" id="overviewStats">
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-value" id="totalBalance">₹0.00</div>
+                        <div class="stat-label">Total Balance</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏦</div>
+                        <div class="stat-value" id="accountCount">0</div>
+                        <div class="stat-label">Accounts</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-value" id="totalCredits">₹0.00</div>
+                        <div class="stat-label">Total Credits</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📉</div>
+                        <div class="stat-value" id="totalDebits">₹0.00</div>
+                        <div class="stat-label">Total Debits</div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>📋 Recent Transactions</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentTransactionsBody">
+                                <tr>
+                                    <td colspan="4" class="empty-state">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Balance Section -->
+            <div class="section-panel" id="section-balance">
+                <div class="page-header">
+                    <h1>💰 My Accounts</h1>
+                    <p>View your account balances and details</p>
+                </div>
+                <div class="stats-grid" id="accountCards">
+                    <div class="loader">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions Section -->
+            <div class="section-panel" id="section-transactions">
+                <div class="page-header">
+                    <h1>📋 Transaction History</h1>
+                    <p>View all your banking transactions</p>
+                </div>
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>📋 All Transactions</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allTransactionsBody">
+                                <tr>
+                                    <td colspan="6" class="empty-state">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transfer Section -->
+            <div class="section-panel" id="section-transfer">
+                <div class="page-header">
+                    <h1>💸 Money Transfer</h1>
+                    <p>Transfer funds to another account securely</p>
+                </div>
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>💸 New Transfer</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert" id="transferAlert">
+                            <span id="transferAlertText"></span>
+                        </div>
+                        <form class="transfer-form" onsubmit="handleTransfer(event)">
+                            <div class="form-group">
+                                <label for="transferTo">Recipient Account Number</label>
+                                <input type="text" id="transferTo" placeholder="e.g., ACC1001000002" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="transferAmount">Amount (₹)</label>
+                                <input type="number" id="transferAmount" placeholder="Enter amount" min="1" step="0.01"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="transferDesc">Description (Optional)</label>
+                                <input type="text" id="transferDesc" placeholder="e.g., Rent payment">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="transferBtn">
+                                💸 Send Money
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Chatbot FAB -->
+    <button class="chatbot-fab" id="chatbotFab" onclick="toggleChatbot()">
+        🤖
+        <span class="badge-dot"></span>
+    </button>
+
+    <!-- Chatbot Window -->
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chat-header">
+            <div class="chat-title">
+                <div class="bot-avatar">🤖</div>
+                <div>
+                    <h4>BankBot AI</h4>
+                    <div class="status"><span class="dot"></span> Online</div>
+                </div>
+            </div>
+            <button class="chat-close" onclick="toggleChatbot()">✕</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-message bot">
+                <div class="message-avatar">🤖</div>
+                <div>
+                    <div class="message-bubble">
+                        👋 Hello! I'm BankBot, your AI banking assistant. I can help you with balance inquiries,
+                        transactions, loans, and more. How can I assist you today?
+                    </div>
+                    <div class="message-time">Just now</div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Type your message..." onkeydown="handleChatKeydown(event)">
+            <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()">➤</button>
+        </div>
+    </div>
+
+    <script src="/js/customer.js"></script>
+    <script src="/js/chatbot.js"></script>
+</body>
+
+</html>
